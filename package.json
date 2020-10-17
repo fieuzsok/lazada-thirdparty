@@ -1,0 +1,29 @@
+{
+  "name": "lazada_thirdparty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "thaola",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "consume-lazada-open-platform-api": "^1.0.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jade": "^1.11.0",
+    "json": "^10.0.0",
+    "lodash": "^4.17.20",
+    "logger": "0.0.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.10.7",
+    "nano": "^8.2.2",
+    "nodemon": "^2.0.4",
+    "serve-favicon": "^2.5.0",
+    "url": "^0.11.0"
+  }
+}
