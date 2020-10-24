@@ -4,22 +4,30 @@ const lazada_api_call = require("./lazada_api_call");
 const express = require("express");
 const bodyParser = require('body-parser');
 var app = express();
+var dbconnect = require('./app/controller/utils/mongoose-connection')
+var accessToken = require('./app/controller/getAccessToken')
 app.use(bodyParser.json());
 var server = http.createServer(app);
+
+
 app.get("/", (req, res) => {
   //res.send(req);
   var result = lazada_api_call.demoCallApi();
+  console.log(req.query)
   res.send(result);
 });
 
-app.post(
-  '/getAccessToken',
+//URL CAll BACK
+app.get(
+  '/getCodeAccessToken',
   (req,res) => {
-    console.log(`statusCode: ${req.statusCode}`)
-    if(req.body)
+    if(req.query && req.query.code)
    {
-    console.log(req.body)
-    res.send(req.body);
+    dbconnect.dbconnect();
+    accessToken.getAccessToken(req.query.code);
+
+    console.log(req.query.code)
+    res.send(req.query.code);
    } 
   }
 )
