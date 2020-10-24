@@ -6,7 +6,7 @@ function newFunction() {
     var mongoose = require('mongoose');
 
     //Thiết lập một kết nối mongoose mặc định
-    var mongoDB = 'mongodb://localhost:27017/lazada';
+    var mongoDB = 'mongodb+srv://db_thaol:db_thaol@lazada.swhyb.mongodb.net/lazada?retryWrites=true&w=majority';
     mongoose.connect(mongoDB);
     //Ép Mongoose sử dụng thư viện promise toàn cục
     mongoose.Promise = global.Promise;
@@ -19,6 +19,7 @@ function newFunction() {
     db.once("open", function() {
       console.log("Connection Successful!");
     });
+
   };
   module.exports = { dbconnect };
 }
