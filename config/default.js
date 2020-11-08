@@ -1,7 +1,7 @@
 const config = {
-    appKey: "123677",
+    appKey: "123679",
     accessToken: "[YOUR ACCESS TOKEN]",
-    appSecret: "sY8CSMrbXo0PnI6MTDMBWScK3vdPaiRD ",
+    appSecret: "BOR7kLjitBl4Nj79O0BfvzAXsscyElqb  ",
     countryCode: "VIETNAM",
 }
 module.exports = { config }
