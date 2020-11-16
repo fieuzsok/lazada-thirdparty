@@ -21,11 +21,11 @@ const getOrders = async (userAccount, { created_after, update_after }) => {
 }
 
 const prepareMandatoryParams = ({ created_after, update_after }) => {
-   var createdAfter = new Date(created_after).toISOString();
-   var updateAfter = new Date(update_after).toISOString();;
+   var createdAfter = created_after ? new Date(created_after).toISOString() : undefined;
+   var updateAfter = update_after ? new Date(update_after).toISOString() : undefined;
   return {
-    created_after: '2018-02-10T16:00:00+08:00',
-    update_after: '2018-02-10T16:00:00+08:00',
+    created_after: createdAfter,
+    update_after: updateAfter,
   }
 }
 
