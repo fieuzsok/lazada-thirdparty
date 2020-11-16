@@ -10,13 +10,6 @@ const getOrders = async (userAccount, { created_after, update_after }) => {
   let accessToken = await AccessTokenModel.getAccessTokenByAccount(userAccount).then(accessToken => accessToken);
   const payload = {
     ...prepareMandatoryParams({created_after, update_after}),
-    created_before: '2018-02-10T16:00:00+08:00',
-    update_before: '2018-02-10T16:00:00+08:00',
-    status: 'shipped',
-    sort_by: "created_at",
-    sort_direction: "ASC",
-    offset: 0,
-    limit: 10,
   }
   console.log(payload)
     const aLazadaAPIWithToken = new LazadaAPI(appKey, appSecret, countryCode)
