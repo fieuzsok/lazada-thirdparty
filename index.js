@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 var app = express();
 var dbconnect = require('./app/controller/utils/mongoose-connection')
 var accessToken = require('./app/controller/getAccessToken')
+const orders = require('./app/controller/OrdersManagement')
 app.use(bodyParser.json());
 var server = http.createServer(app);
 
@@ -37,8 +38,8 @@ app.get(
   '/orders',
   (req,res) => {
     dbconnect.dbconnect();
-    accessToken.getAccessTokenByAccount().then((value)=>{
-      console.log(value.get('access_token'))
+    orders.getOrders('testdeco02@mailinator.com', { created_after: '2017-02-10', update_after: '2017-02-10' }).then((value)=>{
+      res.send(value)
     });
   }
 )

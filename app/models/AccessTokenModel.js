@@ -35,10 +35,11 @@ const saveAccessToken = (obj) => {
 
 const getAccessTokenByAccount = (account) => {
   var AccessTokenModel = mongoose.model('UserToken', AccessToken );
-  var query = AccessTokenModel.findOne({account}).sort({created_at: -1});
+  var query = AccessTokenModel.find({account}).sort({date_expires:-1}).limit(1);
 
   return query.exec().then((value)=>{
-    return value.get('access_token');
+    if(value && value.length > 0)
+    return value[0].get('access_token');
   })
   .catch((e)=>{
     console.log(e)

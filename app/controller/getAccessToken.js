@@ -35,8 +35,8 @@ const getAccessToken = (code) => {
     })
 }
 
-const getAccessTokenByAccount = () => {
-  return AccessTokenModel.getAccessTokenByAccount();
+const getAccessTokenByAccount = (account) => {
+  return AccessTokenModel.getAccessTokenByAccount(account);
 }
 
 module.exports = { getAccessToken, getAccessTokenByAccount };

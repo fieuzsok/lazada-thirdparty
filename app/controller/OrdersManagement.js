@@ -4,26 +4,35 @@ const LazadaAPI = require('lazada-open-platform-sdk');
 const configApp = require('../../config/default');
 const { config } = configApp;
 
-const getOrders = (userAccount, { created_after, update_after }) => {
-  let accessToken;
+const getOrders = async (userAccount, { created_after, update_after }) => {
+  
   const { appKey, appSecret, countryCode } = config;
-  AccessTokenModel.getAccessTokenByAccount('testdeco02@mailinator.com').then(accessToken => accessToken = accessToken);
+  let accessToken = await AccessTokenModel.getAccessTokenByAccount(userAccount).then(accessToken => accessToken);
   const payload = {
-    ...this.prepareMandatoryParams({created_after, update_after}),
-
+    ...prepareMandatoryParams({created_after, update_after}),
+    created_before: '2018-02-10T16:00:00+08:00',
+    update_before: '2018-02-10T16:00:00+08:00',
+    status: 'shipped',
+    sort_by: "created_at",
+    sort_direction: "ASC",
+    offset: 0,
+    limit: 10,
   }
-    const aLazadaAPIWithToken = new LazadaAPI(appKey, appSecret, countryCode, accessToken, payload)
+  console.log(payload)
+    const aLazadaAPIWithToken = new LazadaAPI(appKey, appSecret, countryCode)
+    console.log(accessToken)
+    aLazadaAPIWithToken.accessToken=accessToken
     //get token and save
-    aLazadaAPIWithToken
-    .getOrders().then((res=> console.log(res)))
+    return aLazadaAPIWithToken
+    .getOrders(payload).then((res)=>{console.log(res); return res})
 }
 
 const prepareMandatoryParams = ({ created_after, update_after }) => {
-   var createdAfter = new Date(created_after).toISOString(); '2015-02-10T10:12:50.500Z' ;
+   var createdAfter = new Date(created_after).toISOString();
    var updateAfter = new Date(update_after).toISOString();;
   return {
-    createdAfter,
-    updateAfter
+    created_after: '2018-02-10T16:00:00+08:00',
+    update_after: '2018-02-10T16:00:00+08:00',
   }
 }
 
