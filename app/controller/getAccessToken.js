@@ -1,10 +1,12 @@
 //Thê mới mô hình SomeModel thông qua lệnh require
 var AccessTokenModel = require('../models/AccessTokenModel')
+const LazadaAPI = require('lazada-open-platform-sdk');
+const configApp = require('../../config/default');
+const { config } = configApp;
+const aLazadaAPI = new LazadaAPI(config.appKey, config.appSecret, config.countryCode);
+
 
 const getAccessToken = (code) => {
-    //get accestoken vis code
-    const LazadaAPI = require('lazada-open-platform-sdk');
-    const configApp = require('../../config/default');
     /**
     * LazadaAPI class constructor
     * @param {string} appKey 
@@ -19,8 +21,7 @@ const getAccessToken = (code) => {
     * | 'INDONESIA'
     * @param {string?} accessToken require for some API
     */
-    const { config } = configApp;
-    const aLazadaAPI = new LazadaAPI(config.appKey, config.appSecret, config.countryCode);
+    const aLazadaAPI = new LazadaAPI(config.appKey, config.appSecret, config.countryCode);    
 
     //get token and save
     aLazadaAPI
@@ -34,4 +35,8 @@ const getAccessToken = (code) => {
     })
 }
 
-module.exports = { getAccessToken };
+const getAccessTokenByAccount = () => {
+  return AccessTokenModel.getAccessTokenByAccount();
+}
+
+module.exports = { getAccessToken, getAccessTokenByAccount };

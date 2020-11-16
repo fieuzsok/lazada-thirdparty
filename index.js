@@ -32,6 +32,18 @@ app.get(
   }
 )
 
+// function get UserToken
+app.get(
+  '/orders',
+  (req,res) => {
+    dbconnect.dbconnect();
+    accessToken.getAccessTokenByAccount().then((value)=>{
+      console.log(value.get('access_token'))
+    });
+  }
+)
+
+
 server.listen(process.env.PORT||3000, () => {
   console.log("Server Start on 3000!!");
 });
