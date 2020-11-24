@@ -1,4 +1,5 @@
 var { schema, root } = require('./app/output-schema/orders')
+var { ProductsSchema,  productsRoot} = require('./app/output-schema/products')
 var { graphqlHTTP } = require('express-graphql');
 const https = require("https");
 const http = require("http");
@@ -35,7 +36,7 @@ app.get(
   }
 )
 
-// function get UserToken
+// function get orders REST
 app.get(
   '/orders',
   (req,res) => {
@@ -48,13 +49,23 @@ app.get(
     
   }
 )
-debugger;
+
+// function get orders Graphql
 const orderGraph = graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true
 });
 app.use('/ordersGraphql', orderGraph);
+
+// function get products Graphql
+const productsGraph = graphqlHTTP({
+    schema: ProductsSchema,
+    rootValue: productsRoot,
+    graphiql: true
+});
+app.use('/productssGraphql', productsGraph);
+
 
 server.listen(process.env.PORT||3000, () => {
   console.log("Server Start on 3000!!");
