@@ -39,7 +39,6 @@ app.get(
 app.get(
   '/orders',
   (req,res) => {
-    dbconnect.dbconnect();
      if(req.query && req.query.createdAfter || req.query.updateAfter){
       const { createdAfter, updateAfter } = req.query;
       orders.getOrders('testdeco02@mailinator.com', { created_after: createdAfter, update_after: updateAfter }).then((value)=>{
@@ -49,7 +48,7 @@ app.get(
     
   }
 )
-
+debugger;
 const orderGraph = graphqlHTTP({
     schema: schema,
     rootValue: root,

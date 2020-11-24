@@ -18,7 +18,27 @@ var schema = buildSchema(`
   scalar Date
 
   type Orders {
-    updated_at : String
+    voucher_platform: Int
+    warehouse_code: String
+    voucher: Int
+    order_number: String
+    voucher_seller: String
+    created_at: Date
+    voucher_code: String
+    shipping_fee_discount_platform: String
+    customer_last_name: String
+    updated_at: String
+    promised_shipping_times: String
+    price: String
+    national_registration_number: String
+    shipping_fee_original: Int
+    payment_method: String
+    customer_first_name: String
+    shipping_fee_discount_seller: Int
+    shipping_fee: Int
+    items_count: Int
+    delivery_info: String
+    statuses: [String]
   }
 
   type Query {
@@ -38,11 +58,9 @@ var schema = buildSchema(`
 `);
 
 const handleGetOrders = async (args) => {
-  console.log(args)
   const { account, created_before, created_after, status, update_before, sort_direction, offset, limit, update_after, sort_by} = args;
-    await orders.getOrders('testdeco02@mailinator.com', { created_after, update_after }).then((value)=>{
-      console.log(args)
-        return orderMock;
+    return await orders.getOrders(account, { created_after, update_after }).then((value)=>{
+      return value;
     });
 }
  
