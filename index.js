@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 var server = http.createServer(app);
 
 const orders = require('./app/controller/OrdersManagement')
+const products = require('./app/controller/ProductsManagement');
 
 app.get("/", (req, res) => {
   //res.send(req);
@@ -50,6 +51,19 @@ app.get(
   }
 )
 
+// function create product REST
+app.post(
+  '/products',
+  (req,res) => {    
+    if(req.body) {
+      console.log(req.body.account)
+      products.createProducts(req.body.account, req.body.product);
+      res.sendStatus(200);
+    }
+    
+  }
+)
+
 // function get orders Graphql
 const orderGraph = graphqlHTTP({
     schema: schema,
@@ -64,7 +78,7 @@ const productsGraph = graphqlHTTP({
     rootValue: productsRoot,
     graphiql: true
 });
-app.use('/productssGraphql', productsGraph);
+app.use('/productsGraphql', productsGraph);
 
 
 server.listen(process.env.PORT||3000, () => {
